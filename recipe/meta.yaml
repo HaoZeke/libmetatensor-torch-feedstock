@@ -1,4 +1,5 @@
-{% set version = "0.7.6" %}
+{% set version = "0.9.0.rc5" %}
+{% set source_version = "0.9.0-rc5" %}
 {% set url_base = "https://github.com/lab-cosmo/metatensor/releases/download" %}
 
 package:
@@ -6,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: {{ url_base }}/metatensor-torch-v{{ version }}/metatensor-torch-cxx-{{ version }}.tar.gz
-  sha256: 8dcc07c86094034facba09ebcc6b52f41847c2413737c8f9c88ae0a2990f8d41
+  url: {{ url_base }}/metatensor-torch-v{{ source_version }}/metatensor-torch-cxx-{{ source_version }}.tar.gz
+  sha256: 4173a152d08d40ec66909f4c27fb73362bb6c69e9f6a2e7197ac25fb09f8ef14
 
 build:
-  number: 1
+  number: 0
   run_exports:
     - {{ pin_subpackage('libmetatensor-torch', max_pin='x.x') }}
 
@@ -22,7 +23,7 @@ requirements:
     - cmake
     - ninja
   host:
-    - libmetatensor >=0.1.13,<0.2
+    - libmetatensor >=0.2.0.rc3,<0.3.0
     # We build against the CPU version of torch to not have to deal with CUDA
     # compilers (torch's CMake targets tries to find CUDA compilers even when
     # there is no CUDA code to build). This does not impact the `run`
@@ -51,7 +52,6 @@ about:
   license_family: BSD
   license_file:
     - LICENSE
-    - _deps/nlohmann_json-src/LICENSE.MIT
   doc_url: https://docs.metatensor.org
 
 extra:
